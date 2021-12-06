@@ -158,6 +158,10 @@ def convert_to_pdf(filename, header_filename=None, footer_filename=None, cmd_opt
     else:
         pages = [filename]
 
+    if getattr(settings, 'WKHTMLTOPDF_TOC', False):
+        # Insert 'toc' before filename
+        pages.insert(-1, 'toc')
+
     if header_filename is not None:
         cmd_options['header_html'] = header_filename
     if footer_filename is not None:
